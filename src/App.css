@@ -1,0 +1,371 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: transparent;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.floating-kitten {
+  position: fixed;
+  z-index: 40;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  --kitten-rotation: 90deg;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-kitten.hidden {
+  opacity: 0;
+  transform: scale(0.88);
+}
+
+.floating-kitten.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.floating-kitten-image {
+  width: calc(var(--peek-size, 130px) * 2.6);
+  max-width: 56vw;
+  filter: drop-shadow(0 12px 28px rgba(31, 41, 55, 0.08));
+  transform: rotate(var(--kitten-rotation)) translate(var(--kitten-translate-x, 0%), var(--kitten-translate-y, 0%));
+  transition: transform 0.35s ease, filter 0.35s ease, opacity 0.25s ease;
+  border-radius: 12px;
+  background: radial-gradient(circle at 30% 30%, rgba(167, 139, 250, 0.08), transparent 40%);
+}
+
+.peek-window {
+  /* Remove oval clipping background so central kitten displays without oval container */
+  width: var(--peek-size, 96px);
+  height: var(--peek-size, 96px);
+  overflow: visible;
+  border-radius: 0;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.floating-kitten .talk-bubble {
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  pointer-events: none;
+  background: white;
+  color: var(--text-primary);
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(31, 41, 55, 0.06);
+}
+
+.floating-kitten.speaking .talk-bubble {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.floating-kitten.corner-top-left {
+  /* peek partially off the top-left edge */
+  top: calc(-1 * var(--peek-size, 96px) * 0.35);
+  left: calc(-1 * var(--peek-size, 96px) * 0.35);
+  --kitten-rotation: 0deg;
+  --kitten-translate-x: -35%;
+  --kitten-translate-y: -35%;
+}
+
+.floating-kitten.corner-top-right {
+  /* peek partially off the top-right edge */
+  top: calc(-1 * var(--peek-size, 96px) * 0.35);
+  right: calc(-1 * var(--peek-size, 96px) * 0.35);
+  --kitten-rotation: 90deg;
+  --kitten-translate-x: 35%;
+  --kitten-translate-y: -35%;
+}
+
+.floating-kitten.corner-bottom-left {
+  /* peek partially off the bottom-left edge */
+  bottom: calc(-1 * var(--peek-size, 96px) * 0.35);
+  left: calc(-1 * var(--peek-size, 96px) * 0.35);
+  --kitten-rotation: 270deg;
+  --kitten-translate-x: -35%;
+  --kitten-translate-y: 35%;
+}
+
+.floating-kitten.corner-bottom-right {
+  /* peek partially off the bottom-right edge */
+  bottom: calc(-1 * var(--peek-size, 96px) * 0.35);
+  right: calc(-1 * var(--peek-size, 96px) * 0.35);
+  --kitten-rotation: 180deg;
+  --kitten-translate-x: 35%;
+  --kitten-translate-y: 35%;
+}
+
+/* position talk bubble toward the app center depending on corner */
+.floating-kitten.corner-top-left .talk-bubble {
+  margin-left: calc(var(--peek-size, 96px) * 0.6);
+  margin-top: 6px;
+}
+
+.floating-kitten.corner-top-right .talk-bubble {
+  margin-right: calc(var(--peek-size, 96px) * 0.6);
+  margin-top: 6px;
+}
+
+.floating-kitten.corner-bottom-left .talk-bubble {
+  margin-left: calc(var(--peek-size, 96px) * 0.6);
+  margin-bottom: 8px;
+}
+
+.floating-kitten.corner-bottom-right .talk-bubble {
+  margin-right: calc(var(--peek-size, 96px) * 0.6);
+  margin-bottom: 8px;
+}
+
+.app::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.06) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+  animation: backgroundShift 20s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundShift {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(-5%, 5%);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 48px 0 56px;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(420px, 40%) minmax(0, 60%);
+  gap: 56px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.todo-column {
+  display: flex;
+  min-width: 0;
+  justify-content: flex-end;
+}
+
+.timer-column {
+  display: flex;
+  min-width: 0;
+  justify-content: flex-start;
+}
+
+.footer {
+  background: transparent;
+  padding: 80px 0;
+  margin-top: 64px;
+}
+
+.footer p {
+  font-size: 11px;
+  color: rgba(168, 168, 179, 0.15);
+  text-align: center;
+  margin: 0;
+  letter-spacing: 1px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.app.loading {
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(124, 124, 244, 0.1);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .main-content {
+    padding: 28px 0 36px;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app::before {
+    width: 80%;
+    height: 50%;
+    top: -6%;
+    right: -20%;
+    opacity: 0.7;
+  }
+
+  .header {
+    padding: 14px 0 8px;
+  }
+
+  .main-content {
+    align-items: flex-start;
+    padding: 14px 0 20px;
+  }
+
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .todo-column,
+  .timer-column {
+    justify-content: stretch;
+  }
+
+  .todo-column>*,
+  .timer-column>* {
+    width: 100%;
+  }
+
+  .footer {
+    margin-top: 20px;
+    padding: 12px 0 18px;
+  }
+
+  .footer p {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .main-content {
+    min-height: calc(100svh - 120px);
+  }
+
+  :root {
+    --peek-size: 74px;
+  }
+
+  .floating-kitten {
+    z-index: 5;
+  }
+
+  .floating-kitten .talk-bubble {
+    font-size: 11px;
+    padding: 5px 8px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    min-height: 100svh;
+  }
+
+  .header-content {
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .logo {
+    gap: 8px;
+  }
+
+  .logo h1 {
+    font-size: 18px;
+    letter-spacing: -0.6px;
+  }
+
+  .logo-icon {
+    font-size: 20px;
+  }
+
+  .user-menu {
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .user-email {
+    display: none;
+  }
+
+  .logout-button {
+    padding: 8px 12px !important;
+    min-height: 40px;
+    font-size: 11px !important;
+  }
+
+  .main-content {
+    padding: 10px 0 16px;
+  }
+
+  .dashboard {
+    gap: 12px;
+  }
+
+  .floating-kitten.corner-top-left,
+  .floating-kitten.corner-top-right,
+  .floating-kitten.corner-bottom-left,
+  .floating-kitten.corner-bottom-right {
+    transform-origin: center;
+  }
+
+  .peek-window {
+    width: 68px;
+    height: 68px;
+  }
+
+  .floating-kitten-image {
+    max-width: 62vw;
+  }
+}
