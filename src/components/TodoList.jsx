@@ -116,7 +116,7 @@ export default function TodoList({
   const allCompleted = totalCount > 0 && completedCount === totalCount
 
   return (
-    <div className="todo-list card left-card">
+    <div className="todo-list">
       <div className="kitten-container" aria-live="polite">
         <button
           type="button"

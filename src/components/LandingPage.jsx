@@ -25,7 +25,7 @@ export default function LandingPage({ onLoginClick }) {
   const scrollRef = useRef({
     current: 0,
     target: 0,
-    ease: 0.1
+    ease: 0.05
   });
 
   const requestRef = useRef();

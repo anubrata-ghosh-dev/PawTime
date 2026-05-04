@@ -40,14 +40,16 @@ export default function Auth({ onLoginSuccess }) {
       // Small delay to ensure Firestore is ready
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Check if user has a name set
-      let existingName = null;
-      try {
-        existingName = await getUserName(user.uid);
-      } catch (firestoreErr) {
-        console.log('Firestore read error (may be first time):', firestoreErr);
-        // If Firestore read fails, assume it's first time
-        existingName = null;
+      // Check if user has a name set - first check Firebase Auth displayName, then Firestore
+      let existingName = user.displayName;
+      if (!existingName) {
+        try {
+          existingName = await getUserName(user.uid);
+        } catch (firestoreErr) {
+          console.log('Firestore read error (may be first time):', firestoreErr);
+          // If Firestore read fails, assume it's first time
+          existingName = null;
+        }
       }
       
       if (!existingName) {
@@ -87,14 +89,16 @@ export default function Auth({ onLoginSuccess }) {
       // Small delay to ensure Firestore is ready
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Check if user has a name set
-      let existingName = null;
-      try {
-        existingName = await getUserName(user.uid);
-      } catch (firestoreErr) {
-        console.log('Firestore read error (may be first time):', firestoreErr);
-        // If Firestore read fails, assume it's first time
-        existingName = null;
+      // Check if user has a name set - first check Firebase Auth displayName, then Firestore
+      let existingName = user.displayName;
+      if (!existingName) {
+        try {
+          existingName = await getUserName(user.uid);
+        } catch (firestoreErr) {
+          console.log('Firestore read error (may be first time):', firestoreErr);
+          // If Firestore read fails, assume it's first time
+          existingName = null;
+        }
       }
       
       if (!existingName) {
@@ -224,7 +228,7 @@ export default function Auth({ onLoginSuccess }) {
         <circle cx="125" cy="170" r="20" fill="currentColor"/>
       </svg>
       
-      <div className="auth-card card">
+      <div className="auth-card">
         <div className="auth-header">
           <h1>{isLogin ? 'Welcome Back' : 'Create Account'}</h1>
           <p>{isLogin ? 'Sign in to your PawTime account' : 'Get started with PawTime'}</p>

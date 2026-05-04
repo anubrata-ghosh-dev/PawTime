@@ -1,10 +1,12 @@
 .header {
-  background: rgba(255,255,255,0.6);
-  padding: 20px 0;
-  position: relative;
+  background: var(--gradient-glass);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
   z-index: 200;
-  backdrop-filter: blur(8px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(180%);
   border-bottom: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
 }
 
 .header-content {
@@ -16,24 +18,27 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   cursor: pointer;
-  transition: transform 0.18s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo:hover {
+  transform: scale(1.05) rotate(-2deg);
 }
 
 .logo-icon {
-  font-size: 28px;
-  opacity: 0.95;
-  color: #A78BFA;
+  font-size: 32px;
+  color: var(--primary);
+  filter: drop-shadow(0 4px 8px rgba(184, 161, 255, 0.3));
 }
 
 .logo h1 {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
-  letter-spacing: -0.6px;
   margin: 0;
   color: var(--text-primary);
-  opacity: 0.98;
+  font-family: 'Fredoka', sans-serif;
 }
 
 .nav {
@@ -44,7 +49,7 @@
 .user-menu {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
 .user-email {
@@ -54,24 +59,25 @@
 }
 
 .user-name {
-  font-size: 14px;
-  color: var(--text-primary);
+  font-size: 15px;
+  color: var(--primary);
   font-weight: 700;
-  letter-spacing: 0.2px;
 }
 
 .logout-button {
-  padding: 8px 16px !important;
-  font-size: 12px !important;
+  padding: 10px 20px !important;
+  font-size: 13px !important;
+  background: rgba(255, 154, 162, 0.1) !important;
+  color: var(--danger) !important;
+  border: 1.5px solid var(--danger) !important;
 }
 
 .tagline {
-  font-size: 11px;
-  color: var(--text-secondary);
+  font-size: 12px;
+  color: var(--text-muted);
   font-weight: 600;
-  letter-spacing: 1.5px;
   margin: 0;
-  text-transform: uppercase;
+  font-family: 'Fredoka', sans-serif;
 }
 
 @media (max-width: 768px) {

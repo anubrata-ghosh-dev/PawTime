@@ -117,7 +117,7 @@ export default function PomodoroTimer({ onStart, onReset, onComplete, onRunningC
   const progressPercent = ((INITIAL_TIME - time) / INITIAL_TIME) * 100
 
   return (
-    <div className="timer card right-card">
+    <div className="timer">
       <div className="timer-header">
         <h2>Focus Timer</h2>
         <span className="sessions-badge">{totalSessions} completed</span>
@@ -131,6 +131,13 @@ export default function PomodoroTimer({ onStart, onReset, onComplete, onRunningC
         <div className="signature-particle" />
         <div className="timer-circle">
           <svg className="progress-ring" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#B8A1FF" />
+                <stop offset="55%" stopColor="#FFB7D5" />
+                <stop offset="100%" stopColor="#FFCF6B" />
+              </linearGradient>
+            </defs>
             <circle
               className="progress-ring-circle"
               cx="50"

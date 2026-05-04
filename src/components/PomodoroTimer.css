@@ -6,11 +6,17 @@
   align-items: stretch;
   background: var(--bg-card) !important;
   border: 1px solid var(--border-subtle) !important;
-  box-shadow: var(--shadow-sm) !important;
-  padding: 28px 24px 24px !important;
-  min-height: 380px;
+  box-shadow: var(--shadow-md) !important;
+  padding: 40px !important;
+  min-height: 420px;
   width: 100%;
-  border-radius: 16px;
+  border-radius: var(--border-radius-lg);
+  transition: all 0.3s ease;
+}
+
+.timer:hover {
+  box-shadow: var(--shadow-lg) !important;
+  transform: translateY(-4px);
 }
 
 .timer-header {
@@ -18,87 +24,67 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .timer-header h2 {
-  display: block;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  letter-spacing: 0.5px;
   color: var(--text-secondary);
   margin: 0;
+  font-family: 'Fredoka', sans-serif;
 }
 
 .sessions-badge {
-  font-size: 12px;
-  color: var(--text-primary);
-  background: linear-gradient(90deg, rgba(167,139,250,0.06), rgba(147,197,253,0.04));
+  font-size: 13px;
+  color: var(--primary);
+  background: var(--bg-input);
   border: 1px solid var(--border-subtle);
-  padding: 6px 14px;
-  border-radius: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  letter-spacing: 0.3px;
+  padding: 8px 16px;
+  border-radius: var(--border-radius-pill);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
 }
 
 .timer-display {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 32px;
   position: relative;
 }
 
 .timer-display::before {
   content: '';
   position: absolute;
-  width: 440px;
-  height: 440px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
   z-index: -1;
-  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: blur(60px);
+  transition: all 1s ease;
+  filter: blur(40px);
   opacity: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-/* STATE 1: IDLE */
 .timer-display.state-idle::before {
-  background: radial-gradient(circle, rgba(167,139,250,0.04) 0%, transparent 70%);
-  opacity: 0.45;
-  transform: scale(0.95);
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  opacity: 0.1;
 }
 
-/* STATE 2: RUNNING */
 .timer-display.state-running::before {
-  background: radial-gradient(circle, rgba(167,139,250,0.06) 0%, rgba(147,197,253,0.04) 40%, transparent 70%);
-  opacity: 1;
+  background: radial-gradient(circle, var(--secondary) 0%, var(--primary) 40%, transparent 70%);
+  opacity: 0.2;
   animation: auraBreathing 4s ease-in-out infinite;
-}
-
-/* STATE 3: PAUSED */
-.timer-display.state-paused::before {
-  background: radial-gradient(circle, rgba(124, 124, 244, 0.05) 0%, transparent 70%);
-  opacity: 0.6;
-  transform: scale(1);
-}
-
-/* STATE 4: COMPLETE */
-.timer-display.state-completed::before {
-  background: radial-gradient(circle, rgba(124, 124, 244, 0.12) 0%, transparent 70%);
-  opacity: 1;
-  animation: auraPulse 0.6s ease-out forwards;
 }
 
 .timer-circle {
   position: relative;
-  width: 260px;
-  height: 260px;
+  width: 240px;
+  height: 240px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,97 +92,66 @@
 
 .progress-ring {
   position: absolute;
-  width: 280px;
-  height: 280px;
+  width: 260px;
+  height: 260px;
   transform: rotate(-90deg);
-  top: 0;
-  left: 0;
+  top: -10px;
+  left: -10px;
 }
 
 .progress-ring-circle {
   fill: none;
   stroke: url(#timerGradient);
-  stroke-width: 6;
+  stroke-width: 8;
   stroke-linecap: round;
-  transition: stroke-dasharray 1s linear;
-  opacity: 0.95;
+  transition: stroke-dasharray 0.5s ease;
 }
 
 .time {
-  font-size: 120px;
-  font-weight: 800;
-  color: var(--text-primary);
-  letter-spacing: -6px;
+  font-size: 84px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 55%, #FFCF6B 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Fredoka', sans-serif;
+  letter-spacing: -2px;
   font-variant-numeric: tabular-nums;
   position: relative;
   z-index: 1;
-  transition: all 0.5s ease;
-  opacity: 0.95;
-}
-
-.timer-display.state-running {
-  animation: timerHeroPulse 4s ease-in-out infinite;
-}
-
-@keyframes timerHeroPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.01); }
-}
-
-.timer-display.state-running .time {
-  animation: timerNumberBreathing 4s ease-in-out infinite;
-}
-
-.timer-display.state-paused .time {
-  opacity: 0.8;
+  text-shadow: 0 8px 24px rgba(184, 161, 255, 0.12);
 }
 
 .timer-info {
   width: 100%;
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .session-text {
-  font-size: 13px;
-  color: rgba(168, 168, 179, 0.58);
-  margin: 0;
-  font-weight: 500;
-  letter-spacing: 0.4px;
+  font-size: 15px;
+  color: var(--primary);
+  font-weight: 600;
 }
 
 .timer-controls {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
-  margin-bottom: 16px;
-}
-
-.timer-controls button {
-  flex: 1;
-}
-
-.timer-controls button:disabled,
-.timer-controls button.disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  pointer-events: none;
 }
 
 .timer-notes {
+  margin-top: 24px;
   width: 100%;
   text-align: center;
 }
 
 .note-text {
-  font-size: 11px;
-  color: rgba(168, 168, 179, 0.25);
-  margin: 0;
-  line-height: 1.8;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
   font-weight: 500;
-  letter-spacing: 0.5px;
-  max-width: 400px;
-  margin: 0 auto;
 }
 
 .signature-particle {
