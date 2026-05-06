@@ -1,6 +1,6 @@
-/* Global Styles - Cute Productivity App Theme */
+/* Global Styles */
 :root {
-  /* Cute Pastel Palette */
+  /* Colors */
   --primary: #B8A1FF;
   --primary-hover: #9F84FF;
   --secondary: #FFB7D5;
@@ -19,13 +19,13 @@
   --bg-card: #FFFFFF;
   --bg-input: #F8F7FF;
 
-  /* Text Colors */
+  /* Text */
   --text-primary: #4A4E69;
   --text-secondary: #9A8C98;
   --text-muted: #C9C2CD;
   --text-on-primary: #FFFFFF;
 
-  /* Borders & Shadows */
+  /* Spacing and Effects */
   --border-radius-sm: 12px;
   --border-radius-md: 20px;
   --border-radius-lg: 32px;
@@ -87,7 +87,7 @@ body {
   padding: 32px;
   box-shadow: var(--shadow-md);
   border: 1px solid var(--border-subtle);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -102,7 +102,7 @@ button {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.2s ease;
   font-family: 'Fredoka', sans-serif;
   position: relative;
   overflow: hidden;

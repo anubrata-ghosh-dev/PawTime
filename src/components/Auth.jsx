@@ -37,28 +37,25 @@ export default function Auth({ onLoginSuccess }) {
         user = result.user;
       }
       
-      // Small delay to ensure Firestore is ready
+      // Wait a bit for Firestore to be ready
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Check if user has a name set - first check Firebase Auth displayName, then Firestore
+      // Check if user already has a name
       let existingName = user.displayName;
       if (!existingName) {
         try {
           existingName = await getUserName(user.uid);
         } catch (firestoreErr) {
-          console.log('Firestore read error (may be first time):', firestoreErr);
-          // If Firestore read fails, assume it's first time
+          console.log('Firestore read error:', firestoreErr);
           existingName = null;
         }
       }
       
       if (!existingName) {
-        // First time - show name modal
         setCurrentUser(user);
         setPendingUserId(user.uid);
         setShowNameModal(true);
       } else {
-        // Has name already - proceed to dashboard
         onLoginSuccess?.();
       }
     } catch (err) {
@@ -86,28 +83,25 @@ export default function Auth({ onLoginSuccess }) {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       
-      // Small delay to ensure Firestore is ready
+      // Wait for Firestore to be ready
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Check if user has a name set - first check Firebase Auth displayName, then Firestore
+      // Check if user already has a name
       let existingName = user.displayName;
       if (!existingName) {
         try {
           existingName = await getUserName(user.uid);
         } catch (firestoreErr) {
-          console.log('Firestore read error (may be first time):', firestoreErr);
-          // If Firestore read fails, assume it's first time
+          console.log('Firestore read error:', firestoreErr);
           existingName = null;
         }
       }
       
       if (!existingName) {
-        // First time - show name modal
         setCurrentUser(user);
         setPendingUserId(user.uid);
         setShowNameModal(true);
       } else {
-        // Has name already - proceed to dashboard
         onLoginSuccess?.();
       }
     } catch (err) {

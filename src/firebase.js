@@ -15,7 +15,7 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-// User profile helper functions
+// Save and fetch user profile from Firestore
 export async function saveUserName(uid, name) {
   try {
     const userRef = doc(db, 'users', uid);
@@ -33,11 +33,9 @@ export async function getUserName(uid) {
     if (userSnap.exists() && userSnap.data().name) {
       return userSnap.data().name;
     }
-    // Return null if no document or no name field (first time user)
     return null;
   } catch (err) {
     console.error('Error getting user name:', err);
-    // Throw error so Auth component can handle it
     throw err;
   }
 }

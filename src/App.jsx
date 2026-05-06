@@ -8,22 +8,24 @@ import { auth } from './firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import './App.css'
 
+// Kitten has 4 states: idle (default), focused (timer running), happy (task completed), sad (inactive)
+// The kitten reverts to its previous state after showing happy/sad
 const kittenStates = {
   idle: {
     image: '/assets/kitten/ideal.png',
-    text: 'Ready to focus 🐾',
+    text: 'Ready to focus',
   },
   focused: {
     image: '/assets/kitten/focused.png',
-    text: "I'm focusing with you 🔥",
+    text: 'Focus mode on',
   },
   happy: {
     image: '/assets/kitten/happy.png',
-    text: 'Great job! 🎉',
+    text: 'Nice one!',
   },
   sad: {
     image: '/assets/kitten/sad.png',
-    text: 'Hey… stay with me 😿',
+    text: 'Still here?',
   },
 }
 
@@ -153,7 +155,7 @@ export default function App() {
   const handleTimerStart = useCallback(() => {
     setIsTimerRunning(true)
     setKittenState('focused')
-    speakCentral("Let's focus!")
+    speakCentral('Focus!')
   }, [setKittenState, speakCentral])
 
   const handleTimerReset = useCallback(() => {
@@ -228,7 +230,7 @@ export default function App() {
       </main>
       <footer className="footer">
         <div className="container">
-          <p>&copy; 2026 PawTime. Built for focused productivity.</p>
+          <p>&copy; 2026 PawTime. A simple productivity tool.</p>
         </div>
       </footer>
     </div>

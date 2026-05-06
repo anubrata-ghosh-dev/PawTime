@@ -179,7 +179,7 @@ export default function PomodoroTimer({ onStart, onReset, onComplete, onRunningC
       </div>
 
       <div className="timer-notes">
-        <p className="note-text">The Pomodoro Technique: Focus for 25 minutes, then take a 5-minute break.</p>
+        <p className="note-text">25 minutes of focus. Pause anytime.</p>
       </div>
     </div>
   )

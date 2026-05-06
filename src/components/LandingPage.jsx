@@ -6,10 +6,10 @@ const FRAMES_PER_SEQUENCE = 160;
 const TOTAL_FRAMES = (SEQUENCE_COUNT * FRAMES_PER_SEQUENCE) + 1; // +1 for start frame
 
 const sequences = [
-  { name: 'chaos', path: '/sequences/sequence_1', text: 'Too many distractions. No direction.' },
-  { name: 'transition', path: '/sequences/sequence_2', text: 'Clarity begins when noise fades.' },
-  { name: 'focus', path: '/sequences/sequence_3', text: 'Focus is built, not found.' },
-  { name: 'achievement', path: '/sequences/sequence_4', text: 'Small steps. Real progress.' }
+  { name: 'chaos', path: '/sequences/sequence_1', text: 'Too distracted to focus.' },
+  { name: 'transition', path: '/sequences/sequence_2', text: 'Getting clearer now.' },
+  { name: 'focus', path: '/sequences/sequence_3', text: 'Focus locked in.' },
+  { name: 'achievement', path: '/sequences/sequence_4', text: 'Made it. Progress.' }
 ];
 
 export default function LandingPage({ onLoginClick }) {
@@ -257,16 +257,16 @@ export default function LandingPage({ onLoginClick }) {
             <button className="close-panel" onClick={() => window.location.hash = ''}>&times;</button>
             <h3>About PawTime</h3>
             <div className="typewriter">
-              <p>PawTime was born from a simple observation: our digital lives are loud, but our focus should be quiet. We built a companion that doesn't just track your time, but grows with your effort. Every session you complete is a step toward a more mindful version of yourself, guided by a friend who's always there to cheer you on.</p>
+              <p>I built PawTime because I was tired of overly complicated productivity apps. I wanted something simple—just a to-do list and a timer. The kitten is there because doing work alone felt boring. Having a little friend react to what you're doing actually makes it more fun.</p>
             </div>
          </div>
       </div>
       <div id="story" className="overlay-panel">
          <div className="panel-content">
             <button className="close-panel" onClick={() => window.location.hash = ''}>&times;</button>
-            <h3>Our Story</h3>
+            <h3>Why I Made This</h3>
             <div className="typewriter">
-              <p>It started with a single distracted afternoon. We realized that traditional productivity tools felt cold and mechanical. We wanted something warmer—something that turned the struggle of focus into a shared journey. From chaos to clarity, PawTime is the story of how we reclaim our attention, one purr and one deep breath at a time.</p>
+              <p>I noticed I was switching between different apps for tasks and timers, which defeated the purpose of focusing. I also realized I work better when there's something visual happening—animations, a character, something that gives feedback. So I put it all in one place and added a kitten that changes based on what you're doing.</p>
             </div>
          </div>
       </div>

@@ -1,161 +1,98 @@
-# 🐾 PawTime — Focus & Task Management
+# PawTime
 
-A modern, minimal productivity web application for focused work and task management. PawTime combines a clean to-do list with a Pomodoro timer to help you stay productive.
+#### Video Demo: https://youtu.be/oSwrdVSPTwg
+#### Description:
+A productivity app that combines a to-do list with a Pomodoro timer. I built this because I wanted a simpler alternative to complicated task managers—something that's actually fun to use.
 
-## Features
+## What It Does
 
-### To-Do List
-- ✅ Add, complete, and delete tasks
-- 📊 Progress tracking (completed/total tasks)
-- 💾 Auto-save to localStorage
-- 🎨 Smooth animations for all interactions
+**To-Do List**
+- Add, mark complete, and delete tasks
+- See how many tasks you've finished today
+- Tasks save to your browser automatically
 
-### Pomodoro Timer
-- ⏱️ 25-minute focused work sessions
-- ▶️ Start, Pause, and Reset controls
-- 🔔 Audio notification when session completes
-- 📈 Track completed Pomodoro sessions
-- 💾 Auto-save timer state
+**Pomodoro Timer**
+- 25-minute focus sessions (can't change the time, but that's kinda the point)
+- Start/pause/reset buttons
+- Beep sound when you finish a session
+- Keeps track of how many sessions you've done
 
-## Tech Stack
+**The Kitten**
+- A pet that reacts to what you're doing
+- Meows if you hover over it
+- Gets happy when you complete tasks
+- Gets sad if you're inactive for too long (it's just a fun way to keep you engaged)
 
-- **Framework**: React 18
-- **Build Tool**: Vite
-- **Styling**: Plain CSS (no dependencies)
-- **Font**: Inter (Google Fonts)
-- **State Management**: React Hooks + localStorage
+## How to Run It
 
-## Getting Started
+You need Node.js installed.
 
-### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
+```bash
+npm install
+npm run dev
+```
 
-### Installation
+It'll open at `http://localhost:3000`.
 
-1. Navigate to the project directory:
-   ```bash
-   cd /Users/anubrataghosh/Projects/PawTime
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-   The app will open at `http://localhost:3000`
-
-### Build for Production
-
+To build for production:
 ```bash
 npm run build
 ```
 
-The optimized build will be generated in the `dist/` folder.
+## How It's Built
+
+- **React 18** for the UI
+- **Vite** as the build tool (way faster than Create React App)
+- **Plain CSS** with CSS variables for theming
+- **Firebase** for authentication and storing tasks in the cloud
+- **localStorage** as a backup for the timer state
+
+The design is minimal and light. I used Fredoka font and a pastel color palette because it feels less stressful than dark mode.
 
 ## Project Structure
 
 ```
-PawTime/
-├── src/
-│   ├── components/
-│   │   ├── Header.jsx          # App header with logo
-│   │   ├── Header.css
-│   │   ├── TodoList.jsx        # To-do list component
-│   │   ├── TodoList.css
-│   │   ├── PomodoroTimer.jsx   # Pomodoro timer component
-│   │   └── PomodoroTimer.css
-│   ├── App.jsx                 # Main app component
-│   ├── App.css
-│   ├── styles.css              # Global styles
-│   └── index.jsx               # React entry point
-├── index.html                  # HTML entry point
-├── package.json
-├── vite.config.js
-└── README.md
+src/
+├── components/
+│   ├── Header.jsx
+│   ├── TodoList.jsx
+│   ├── PomodoroTimer.jsx
+│   ├── Auth.jsx
+│   ├── LandingPage.jsx
+│   └── [css files]
+├── App.jsx
+├── firebase.js
+├── index.jsx
+└── styles.css
 ```
 
-## Design
+## Challenges I Faced
 
-### Color Palette
-- **Background**: `#0F0F14` (Dark)
-- **Secondary**: `#1A1A21` (Cards)
-- **Tertiary**: `#2A2A32` (Inputs)
-- **Primary Accent**: `#7C7CF4` (Muted Purple)
-- **Text**: `#E5E5E5` (Light)
-- **Secondary Text**: `#A8A8B3` (Gray)
+1. **Kitten animations** - I wanted the kitten to transition smoothly between states. I used setTimeout and refs to handle the timing, which took a while to get right.
 
-### Typography
-- **Font**: Inter (Google Fonts)
-- **Title**: Bold, letter-spacing: -0.5px
-- **Body**: Regular, letter-spacing: 0.3px
+2. **Timer persistence** - Keeping the timer state across page refreshes required localStorage. At first I was only saving on unmount, but that missed quick reloads.
 
-### Layout
-- **Desktop**: Two-column layout (To-Do on left, Timer on right)
-- **Mobile**: Stacked layout (To-Do above Timer)
-- **Container Width**: 1000–1200px
-- **Padding**: 24–32px
+3. **Task sorting** - I wanted to show today's tasks first, then pending tasks below. Sorting arrays and using useMemo for this was more complex than it sounds.
 
-## Features in Detail
+4. **Canvas animation on landing page** - Preloading 640+ images for the sequence animation and rendering them smoothly was tricky. I had to optimize the canvas rendering and use easing functions for smooth scrolling.
 
-### To-Do List
-- Type task name and press Enter or click Add
-- Click checkbox to mark complete
-- Click ✕ button to delete
-- Progress bar shows completion percentage
-- All tasks saved to browser's localStorage
+5. **Firebase rules** - Getting the Firestore security rules right took time. Users should only see their own tasks.
 
-### Pomodoro Timer
-- Default session: 25 minutes
-- Timer display with circular progress indicator
-- Audio notification when session completes
-- Session counter tracks completed Pomodoros
-- Timer state persists across sessions
-- Beautiful glow animation while running
+## What I'd Do Differently (If I Had More Time)
 
-## Interactions & Animations
+- Add a break timer (5 min) after each Pomodoro
+- Let users customize the timer length
+- Add a simple stats view (completed sessions this week, etc.)
+- Dark mode toggle
+- Export tasks to CSV
 
-- **Add Task**: Fade-in animation (0.3s)
-- **Complete Task**: Strike-through + opacity fade
-- **Delete Task**: Slide-out animation (0.3s)
-- **Button Hover**: Brightness increase + shadow elevation
-- **Input Focus**: Subtle purple border highlight
-- **Timer Running**: Subtle glow animation
+## What It Doesn't Do
+
+- No time tracking for tasks
+- No recurring/recurring tasks
+- No task priorities or due dates
+- The kitten is just for fun—it doesn't affect your tasks
 
 ## Browser Support
 
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Mobile browsers
-
-## Future Enhancements
-
-- Dark/Light theme toggle
-- Custom timer durations
-- Break timer integration
-- Task categories/tags
-- Data export (JSON/CSV)
-- Statistics dashboard
-- Sound selection for notifications
-
-## Performance
-
-- Optimized with Vite
-- No unnecessary re-renders
-- Efficient localStorage operations
-- Responsive animations at 60fps
-- Minimal CSS (no unused classes)
-
-## License
-
-MIT License — Feel free to use and modify.
-
----
-
-**Built with ❤️ for focused productivity.**
+Works on Chrome, Firefox, Safari, and Edge. Mobile works but the layout isn't perfect on very small screens.
